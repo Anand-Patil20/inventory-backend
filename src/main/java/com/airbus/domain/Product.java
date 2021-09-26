@@ -1,4 +1,4 @@
-package com.airbus.inventory.domain;
+package com.airbus.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +10,8 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "inventory")
-public class Inventory{
+@Table(name = "product")
+public class Product{
 
 
 	@Id
@@ -103,7 +103,7 @@ public class Inventory{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Inventory other = (Inventory) obj;
+		Product other = (Product) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
