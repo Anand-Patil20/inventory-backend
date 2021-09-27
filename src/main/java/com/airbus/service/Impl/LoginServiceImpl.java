@@ -28,26 +28,6 @@ public class LoginServiceImpl implements LoginService,UserDetailsService {
 		return addUser;
 	}
 
-//	@Override
-//	public String authenticate(String authValue) {
-//		String token=null;
-//		JSONObject auth=null;
-//		try {
-//			auth = new JSONObject(authValue);
-//		} catch (JSONException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		User checkUser=loginRepository.checkIfExist(auth.optString("username"),auth.optString("password"));
-//		if(checkUser==null || checkUser.getId()==null) {
-//			return null;	
-//		}else {
-//			
-//		}
-//		
-//		return token;
-//	}
-
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user=loginRepository.findByUsername(username);

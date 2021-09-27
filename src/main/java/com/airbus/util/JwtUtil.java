@@ -38,13 +38,14 @@ public class JwtUtil {
 
     public String generateToken(String username) {
         Map<String, Object> claims = new HashMap<>();
+        
         return createToken(claims, username);
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
 
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 *60 ))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60* 60 * 5  ))
                 .signWith(SignatureAlgorithm.HS256, secret).compact();
     }
 

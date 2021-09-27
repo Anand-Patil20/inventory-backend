@@ -144,4 +144,18 @@ public class Product{
 				+ "]";
 	}
 
+	public Product() {
+		
+	}
+	public Product(Integer id, String productId, String productCategory, String productName, String productDescription,
+			Integer units) {
+		super();
+		this.id = id;
+		this.productId = productId;
+		this.productCategory = productCategory;
+		this.productName = productName;
+		this.productDescription = productDescription;
+		this.units = units;
+	}
+
 }

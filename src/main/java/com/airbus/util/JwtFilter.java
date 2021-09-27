@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.rmi.ServerException;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
@@ -25,7 +26,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-
+    	try {
         String authorizationHeader = httpServletRequest.getHeader("Authorization");
 
         String token = null;
@@ -48,7 +49,18 @@ public class JwtFilter extends OncePerRequestFilter {
                         .setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
+
+            
         }
+    
         filterChain.doFilter(httpServletRequest, httpServletResponse);
+    }catch(Exception e) {
+    	System.out.println(e.getMessage());
+    	if(e.getMessage().toLowerCase().contains("jwt expired")) {
+    		httpServletResponse.reset();
+        	httpServletResponse.setStatus(403);		
+    	}
+    
+    }       
     }
 }

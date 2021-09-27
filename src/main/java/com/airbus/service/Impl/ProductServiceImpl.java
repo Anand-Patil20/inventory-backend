@@ -21,14 +21,15 @@ public class ProductServiceImpl implements ProductService {
 		return productList;
 	}
 	
-	public List<Product> getByCategory(String category){
-		List<Product> productList=ProductRepository.findByCategory(category);
-		return productList;
-	}
 
 	@Override
 	public Product addProduct(Product product) {
-		Product result=ProductRepository.save(product);
+		List<Integer> ids=ProductRepository.getByProductId(product.getProductId());
+		Product result=null;
+		if(ids.isEmpty())
+		{
+			result=ProductRepository.save(product);
+		}
 		return result;
 	}
 
@@ -43,6 +44,13 @@ public class ProductServiceImpl implements ProductService {
 			return "Successfully Deleted";
 		}
 		return "Error in Deletion";
+	}
+
+
+	@Override
+	public Product updateProduct(Product product) {
+		Product result=ProductRepository.save(product);
+		return result;
 	}
 
 }
